@@ -1,5 +1,5 @@
 import sys, json, requests;
-from os.path import exists;
+from os.path import exists, realpath, dirname, join;
 from configparser import ConfigParser;
 from setup import *;
 
@@ -12,11 +12,13 @@ except Exception:
 
 config_object = ConfigParser()
 
+config_path = join(dirname(realpath(__file__)), 'config.ini')
+
 # Run setup from setup.py if config hasn't been created
-if not exists('config.ini'):
+if not exists(config_path):
     runSetup()
 
-config_object.read("config.ini")
+config_object.read(config_path)
 
 config = config_object["config"]
 accessToken = config["accessToken"]
