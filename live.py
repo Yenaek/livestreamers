@@ -39,34 +39,21 @@ except (KeyError, ValueError):
     print("Error - make sure the config is configured correctly.")
     sys.exit(1)
 
-print ("\nCHANNEL " + ' '*13 + "GAME" + ' '*37 + "VIEWERS" + ' '*8 + "\n" + '-'*80)
-
-
 for i in range (0, numStreams):
     channelName = data["data"][i]["user_name"];
     channelGame = data["data"][i]["game_name"];
+    channelTitle = data["data"][i]["title"];
     channelViewers = str(data["data"][i]["viewer_count"]);
     streamType = data["data"][i]["type"];
 
     # Check if stream is actually live or VodCast
-    if(streamType == "live"):
-        streamType = "";
-    else:
-        streamType = "(vodcast)";
-
-    #Truncate long channel names/games
-    if(len(channelName) > 18):
-        channelName = channelName[:18] + ".."
-    if(len(channelGame) > 38):
-        channelGame = channelGame[:38] + ".."
+    if(streamType != "live"):
+        continue
 
     #Formatting
-    print ("{} {} {} {}".format(
-	channelName.ljust(20),
-	channelGame.ljust(40),
-	channelViewers.ljust(8),
-	streamType
+    print ("{}\t{}\t{}\t{}".format(
+	channelName,
+	channelGame,
+    channelTitle,
+	channelViewers
     ))
-
-    if (i == numStreams-1):
-        print ('-'*80)

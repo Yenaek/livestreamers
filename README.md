@@ -1,4 +1,5 @@
 # livestreamers
+Forked from [this](https://github.com/begs/livestreamers) and modified for parsing with awk to use in scripts.  
 A Python script that uses Twitch.tv API to check if a user's followed channels are live.
 
 ## Installation
